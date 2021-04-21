@@ -7,7 +7,7 @@ struct Linkedlist
 	Linkedlist(const char* string)
 	{
 		data = string;
-		next = NULL;
+		this->next = NULL;
 	}
 	~Linkedlist()
 	{
