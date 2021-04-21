@@ -6,37 +6,29 @@ struct Linkedlist
 	const char* data;
 	Linkedlist* head;
 	Linkedlist* tail;
+	Linkedlist(const char* string)
+	{
+		data = string;
+		this->head = NULL;
+		this->tail = NULL;
+	}
 	~Linkedlist()
 	{
 		delete[]data;
 		delete[]head;
 		delete[]tail;
 	}
-	void init(const char* c)
-	{
-		data = c;
-		head = NULL;
-		tail = NULL;
-	}
-	Linkedlist* createNode(const char* c)
-	{
-		Linkedlist* tmp = new Linkedlist;
-		tmp->data = c;
-		tmp->head = NULL;
-		tmp->tail = NULL;
-		return tmp;
-	}
 	Linkedlist* addFirst(const char* c)
 	{
-		assert(this != NULL);
-		Linkedlist* tmp = createNode(c);
+		//assert(this != NULL);
+		Linkedlist* tmp = new Linkedlist(c);
 		tmp->tail = this;
 		this->head = tmp;
 		return tmp;
 	}
 	void print()
 	{
-		assert(this != NULL);
+		//assert(this != NULL);
 		Linkedlist* read = this;
 		while (read != NULL)
 		{
@@ -47,8 +39,8 @@ struct Linkedlist
 	}
 	void addLast(const char* c)
 	{
-		assert(this != NULL);
-		Linkedlist* tmp = createNode(c);
+		//assert(this != NULL);
+		Linkedlist* tmp = new Linkedlist(c);
 		Linkedlist* read = this;
 		while (read->tail != NULL) read = read->tail;
 		read->tail = tmp;
@@ -56,26 +48,26 @@ struct Linkedlist
 	}
 	Linkedlist* removeFirst()
 	{
-		assert(this != NULL);
-		assert(this != NULL);
+	//	assert(this != NULL);
+	//	assert(this != NULL);
 		this->tail->head = NULL;
 		return this->tail;
 	}
 	void removeLast()
 	{
-		assert(this != NULL);
+	//	assert(this != NULL);
 		Linkedlist* read = this;
 		while (read->tail->tail != NULL) read = read->tail;
 		read->tail = NULL;
 	}
 	void insertAfter(Linkedlist* p, const char* c)
 	{
-		assert(this != NULL);
-		assert(p == NULL);
+	//	assert(this != NULL);
+	//	assert(p == NULL);
 		if (p->tail == NULL)  addLast(c);
 		else
 		{
-			Linkedlist* tmp = createNode(c);
+			Linkedlist* tmp = new Linkedlist(c);
 			p->tail->head = tmp;
 			tmp->tail = p->tail;
 			tmp->head = p;
@@ -84,8 +76,8 @@ struct Linkedlist
 	}
 	Linkedlist* removeNode(Linkedlist* p)
 	{
-		assert(this != NULL);
-		assert(p != NULL);
+	//	assert(this != NULL);
+	//	assert(p != NULL);
 		if (this == p) { removeFirst(); return this; }
 		else if (p->tail == NULL) { removeLast(); return this; }
 		else
@@ -100,8 +92,7 @@ struct Linkedlist
 };
 int main()
 {
-	Linkedlist* f = new Linkedlist;
-	f->init("Heavy");
+	Linkedlist* f = new Linkedlist("Heavy");
 	f = f->addFirst("Metal");
 	f->addLast("Burst");
 	f->print();
