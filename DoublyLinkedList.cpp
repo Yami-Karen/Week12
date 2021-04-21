@@ -20,26 +20,13 @@ struct Linkedlist
 	}
 	Linkedlist* addFirst(const char* c)
 	{
-		//assert(this != NULL);
 		Linkedlist* tmp = new Linkedlist(c);
 		tmp->tail = this;
 		this->head = tmp;
 		return tmp;
 	}
-	void print()
-	{
-		//assert(this != NULL);
-		Linkedlist* read = this;
-		while (read != NULL)
-		{
-			cout << read->data << " ";
-			read = read->tail;
-		}
-		cout << "\n------------------\n";
-	}
 	void addLast(const char* c)
 	{
-		//assert(this != NULL);
 		Linkedlist* tmp = new Linkedlist(c);
 		Linkedlist* read = this;
 		while (read->tail != NULL) read = read->tail;
@@ -48,22 +35,18 @@ struct Linkedlist
 	}
 	Linkedlist* removeFirst()
 	{
-	//	assert(this != NULL);
-	//	assert(this != NULL);
 		this->tail->head = NULL;
 		return this->tail;
 	}
 	void removeLast()
 	{
-	//	assert(this != NULL);
 		Linkedlist* read = this;
 		while (read->tail->tail != NULL) read = read->tail;
 		read->tail = NULL;
 	}
 	void insertAfter(Linkedlist* p, const char* c)
 	{
-	//	assert(this != NULL);
-	//	assert(p == NULL);
+		assert(p != NULL);
 		if (p->tail == NULL)  addLast(c);
 		else
 		{
@@ -76,8 +59,7 @@ struct Linkedlist
 	}
 	Linkedlist* removeNode(Linkedlist* p)
 	{
-	//	assert(this != NULL);
-	//	assert(p != NULL);
+		assert(p != NULL);
 		if (this == p) { removeFirst(); return this; }
 		else if (p->tail == NULL) { removeLast(); return this; }
 		else
@@ -88,6 +70,17 @@ struct Linkedlist
 			j->head = i;
 			return this;
 		}
+	}
+	void print()
+	{
+		assert(this != NULL);
+		Linkedlist* read = this;
+		while (read != NULL)
+		{
+			cout << read->data << " ";
+			read = read->tail;
+		}
+		cout << "\n------------------\n";
 	}
 };
 int main()
