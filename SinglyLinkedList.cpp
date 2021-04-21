@@ -4,32 +4,25 @@ struct Linkedlist
 {
 	const char* data;
 	Linkedlist* next;
+	Linkedlist(const char* string)
+	{
+		data = string;
+		next = NULL;
+	}
 	~Linkedlist()
 	{
 		delete[]data;
 		delete[]next;
 	}
-	void init(const char* c)
-	{
-		data = c;
-		next = NULL;
-	}
-	Linkedlist* createNode(const char* c)
-	{
-		Linkedlist* tmp = new Linkedlist;
-		tmp->data = c;
-		tmp->next = NULL;
-		return tmp;
-	}
 	Linkedlist* addFirst(const char* c)
 	{
-		Linkedlist* tmp = createNode(c);
+		Linkedlist* tmp = new Linkedlist(c);
 		tmp->next = this;
 		return tmp;
 	}
 	void addLast(const char* c)
 	{
-		Linkedlist* tmp = createNode(c);
+		Linkedlist* tmp = new Linkedlist(c);
 		Linkedlist* read = this;
 		while (read->next != NULL) read = read->next;
 		read->next = tmp;
@@ -52,11 +45,11 @@ struct Linkedlist
 	{
 		Linkedlist* read = this;
 		while (read->next->next != NULL) read = read->next;
-		read->next = NULL;		
+		read->next = NULL;
 	}
 	void insertAfter(Linkedlist* p, const char* c)
 	{
-		Linkedlist* tmp = createNode(c);
+		Linkedlist* tmp = new Linkedlist(c);
 		if (p->next == NULL) p->next = tmp;
 		else
 		{
@@ -79,8 +72,7 @@ struct Linkedlist
 };
 int main()
 {
-	Linkedlist* f = new Linkedlist;
-	f->init("Heavy");
+	Linkedlist* f = new Linkedlist("Heavy");
 	f = f->addFirst("Metal");
 	f->addLast("Burst");
 	f->print();
@@ -88,7 +80,7 @@ int main()
 	f->print();
 	f->removeLast();
 	f->print();
-	f->insertAfter(f,"Lina");
+	f->insertAfter(f, "Lina");
 	f->print();
 	f->insertAfter(f, "K");
 	f = f->removeNode(f->next);
